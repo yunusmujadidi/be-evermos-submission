@@ -1,0 +1,34 @@
+# Git
+.git
+.gitignore
+
+# Environment files
+.env
+.env.*
+
+# Documentation
+*.md
+!README.md
+
+# IDE
+.vscode
+.idea
+
+# Binaries
+*.exe
+main
+app.exe
+
+# Uploads (will be mounted)
+uploads/
+app/uploads/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Go specific
+vendor/ 

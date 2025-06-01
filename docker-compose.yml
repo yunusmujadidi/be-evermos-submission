@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: evermos_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: evermos_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - evermos_network
+
+  app:
+    build: .
+    container_name: evermos_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql
+      DB_NAME: evermos_db
+      DB_USER: root
+      DB_PASSWORD: root
+      JWT_SECRET: mysecretkey123
+    depends_on:
+      - mysql
+    volumes:
+      - ./uploads:/root/uploads
+    networks:
+      - evermos_network
+
+volumes:
+  mysql_data:
+
+networks:
+  evermos_network:
+    driver: bridge
